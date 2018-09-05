@@ -2,11 +2,16 @@ var express = require('express');
 var router = express.Router();
 
 var mongoose = require("mongoose");
-var uri = 'mongodb+srv://projectNative:Rahuldravid@180@cluster0-53qcr.mongodb.net/test?retryWrites=true';
-//mongoose.connect("mongodb+srv://projectNative:Rahuldravid@180@cluster0-53qcr.mongodb.net/test?retryWrites=true");
 var MongoClient = require('mongodb').MongoClient;
-MongoClient.connect(uri);
 
+var uri = "mongodb+srv://projectNative:Rahuldravid@180@cluster0-53qcr.mongodb.net/test?retryWrites=true";
+
+MongoClient.connect(uri, function(err, client) {
+   const collection = client.db("test").collection("devices");
+   // perform actions on the collection object
+   client.close();
+});
+/*
 var userSchema = new mongoose.Schema({
  firstName: String,
  lastNameName: String
@@ -28,4 +33,4 @@ router.post("/login", (req, res) => {
  });
 });
 
-module.exports = router;
+module.exports = router;*/
