@@ -6,33 +6,9 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var loginRouter = require('./routes/login');
+var googleLoginRouter = require('./routes/login');
 
 var app = express();
-
-/*
-var MongoClient = require('mongodb').MongoClient;
-
-var uri = "mongodb+srv://newadmin:helloworld@cluster0-53qcr.mongodb.net/projectNativeUsers?retryWrites=true";
-MongoClient.connect(uri, { useNewUrlParser: true }, function(err, client) {
-      if (err) {
-    throw new Error('Database failed to connect!');
-    } else {
-    console.log('MongoDB successfully connected');
-    var myDB=client.db('projectNative');
-      }
-    //var collection = client.myDB.collection('registeredUsers');
-    console.log("Database created!");
-    console.log("Bye...");
-    client.close();
-});
-/*
-MongoClient.connect(uri, function(err, client) {
-   const collection = client.db("test").collection("devices");
-   // perform actions on the collection object
-   client.close();
-});
-*/
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -45,7 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/login',loginRouter);
+app.use('/google-login',googleLoginRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

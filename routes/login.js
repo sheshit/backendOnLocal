@@ -18,7 +18,14 @@ throw new Error('Database failed to connect!');
 console.log('MongoDB successfully connected');
   }
 });
-
+/*
+async function getUserInfo(accessToken) {
+  let userInfoResponse = await fetch('https://www.googleapis.com/userinfo/v2/me', {
+    headers: { Authorization: `Bearer ${accessToken}`},
+  });
+  return userInfoResponse;
+}
+*/
 loginRouter.route('/').get((req,res)=>{
   res.send("Done and dusted.");
 }).post((req, res) => {
