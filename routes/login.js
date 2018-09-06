@@ -1,30 +1,32 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const loginRouter = express.Router();
+
+const bodyParser = require('body-parser');
+loginRouter.use(bodyParser.json());
 
 var mongoose = require("mongoose");
 var MongoClient = require('mongodb').MongoClient;
 
-var uri = "mongodb+srv://projectNative:Rahuldravid@180@cluster0-53qcr.mongodb.net/test?retryWrites=true";
+var User = require('../models/userSchema');
 
-MongoClient.connect(uri, function(err, client) {
-   const collection = client.db("test").collection("devices");
-   // perform actions on the collection object
-   client.close();
+var uri = "mongodb+srv://newadmin:helloworld@cluster0-53qcr.mongodb.net/projectNativeUsers?retryWrites=true";
+
+mongoose.connect(uri, { useNewUrlParser: true },function(err,client){
+  if (err) {
+throw new Error('Database failed to connect!');
+} else {
+console.log('MongoDB successfully connected');
+  }
 });
-/*
-var userSchema = new mongoose.Schema({
- firstName: String,
- lastNameName: String
-});
 
-var User = mongoose.model("User", userSchema);
-
-var bodyParser = require('body-parser');
-router.use(bodyParser.json());
-
-router.post("/login", (req, res) => {
+loginRouter.route('/').get((req,res)=>{
+  res.send("Done and dusted.");
+}).post((req, res) => {
  var myData = new User(req.body);
- myData.save()
+ console.log("inside the post");
+ console.log(req.body+"  this is request body");
+ console.log(myData+"  this.is what goes into mongodb");
+myData.save()
  .then(item => {
  res.send("item saved to database");
  })
@@ -33,4 +35,4 @@ router.post("/login", (req, res) => {
  });
 });
 
-module.exports = router;*/
+module.exports = loginRouter;
