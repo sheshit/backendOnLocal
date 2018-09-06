@@ -1,6 +1,9 @@
 var mongoose = require("mongoose");
 var accessTokenSchema = new mongoose.Schema({
- accessToken: String
+ accessToken: String,
+ name:String,
+ email:String,
+ photoUrl:String,
 });
 
 var User = mongoose.model("User", accessTokenSchema);

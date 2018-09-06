@@ -5,9 +5,8 @@ const bodyParser = require('body-parser');
 loginRouter.use(bodyParser.json());
 
 var mongoose = require("mongoose");
-var MongoClient = require('mongodb').MongoClient;
-
 var User = require('../models/userSchema');
+var fetch = require("node-fetch");
 
 var uri = "mongodb+srv://newadmin:helloworld@cluster0-53qcr.mongodb.net/projectNativeUsers?retryWrites=true";
 
@@ -16,22 +15,26 @@ mongoose.connect(uri, { useNewUrlParser: true },function(err,client){
 throw new Error('Database failed to connect!');
 } else {
 console.log('MongoDB successfully connected');
+console.log("Start sending Requests.... lets rock and roll");
   }
 });
+
 /*
-async function getUserInfo(accessToken) {
-  let userInfoResponse = await fetch('https://www.googleapis.com/userinfo/v2/me', {
+ getUserInfo = async (accessToken) => {
+  var userInfoResponse = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
+    method:'GET',
     headers: { Authorization: `Bearer ${accessToken}`},
   });
-  return userInfoResponse;
+  console.log(JSON.stringify(userInfoResponse)+"this is the user response coming from getUserInfo(accessToken)");
 }
 */
+
 loginRouter.route('/').get((req,res)=>{
   res.send("Done and dusted.");
 }).post((req, res) => {
  var myData = new User(req.body);
- console.log("inside the post");
- console.log(req.body+"  this is request body");
+ console.log("inside the post request");
+ //getUserInfo(req.body.accessToken);
  console.log(myData+"  this.is what goes into mongodb");
 myData.save()
  .then(item => {
