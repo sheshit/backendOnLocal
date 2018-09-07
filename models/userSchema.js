@@ -1,6 +1,9 @@
 var mongoose = require("mongoose");
-var accessTokenSchema = new mongoose.Schema({
+var Schema = mongoose.Schema;
+var accessTokenSchema = new Schema({
+ userId:String,
  accessToken: String,
+ refreshToken:String,
  name:String,
  email:String,
  photoUrl:String,

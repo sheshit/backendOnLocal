@@ -21,11 +21,12 @@ console.log("Start sending Requests.... lets rock and roll");
 
 /*
  getUserInfo = async (accessToken) => {
-  var userInfoResponse = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
+  var userInfoResponse = await fetch('https://www.googleapis.com/userinfo/v2/me', {
     method:'GET',
     headers: { Authorization: `Bearer ${accessToken}`},
   });
-  console.log(JSON.stringify(userInfoResponse)+"this is the user response coming from getUserInfo(accessToken)");
+  console.log("coming from user userInfoResponse:::");
+  console.log(userInfoResponse.name+" and "+userInfoResponse.picture);
 }
 */
 
@@ -34,7 +35,7 @@ loginRouter.route('/').get((req,res)=>{
 }).post((req, res) => {
  var myData = new User(req.body);
  console.log("inside the post request");
- //getUserInfo(req.body.accessToken);
+// getUserInfo(req.body.accessToken);
  console.log(myData+"  this.is what goes into mongodb");
 myData.save()
  .then(item => {
