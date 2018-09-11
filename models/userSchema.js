@@ -7,6 +7,9 @@ var accessTokenSchema = new Schema({
  name:String,
  email:String,
  photoUrl:String,
+},
+{
+  timestamps:true,
 });
 
 var User = mongoose.model("User", accessTokenSchema);
