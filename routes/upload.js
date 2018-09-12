@@ -5,7 +5,17 @@ var mongoose = require("mongoose");
 var Upload = require('../models/imageUploadSchema');
 var fetch = require("node-fetch");
 var multer = require('multer');
-var upload = multer({dest:'uploads/'});
+
+const storage = multer.diskStorage({
+  destination:function(req,file,callback){
+    callback(null, './uploads/');
+  },
+  filename:function(req,file,callback){
+    callback(null, Date.now()+file.originalname);
+  }
+});
+
+var upload = multer({storage : storage});
 
 var uri = "mongodb+srv://newadmin:helloworld@cluster0-53qcr.mongodb.net/FileUploads?retryWrites=true";
 
@@ -21,7 +31,12 @@ console.log("Start sending Requests.... lets rock and roll");
 uploadRouter.post('/',upload.single('uploadImage'),function(req,res,next){
   console.log(req.file);
   console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
-  var uploadData = new Upload(req.body);
+  var uploadData = new Upload({
+    username:req.body.username,
+    tagline:req.body.tagline,
+    uploadImage:req.file.path,
+  });
+  console.log(uploadData);
   uploadData.save()
   .then(result=>{
     console.log("Image uploaded");
