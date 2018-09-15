@@ -9,13 +9,14 @@ var User = require('../models/userSchema');
 var fetch = require("node-fetch");
 
 var uri = "mongodb+srv://newadmin:helloworld@cluster0-53qcr.mongodb.net/projectNativeUsers?retryWrites=true";
+console.log("login.js");
 
 mongoose.connect(uri, { useNewUrlParser: true },function(err,client){
   if (err) {
 throw new Error('Database failed to connect!');
 } else {
 console.log('MongoDB successfully connected');
-console.log("Start sending Requests.... lets rock and roll");
+console.log("Start sending Requests...");
   }
 });
 

@@ -18,19 +18,18 @@ const storage = multer.diskStorage({
 var upload = multer({storage : storage});
 
 var uri = "mongodb+srv://newadmin:helloworld@cluster0-53qcr.mongodb.net/FileUploads?retryWrites=true";
-
+console.log("upload.js");
 mongoose.connect(uri, { useNewUrlParser: true },function(err,client){
   if (err) {
 throw new Error('Database failed to connect!');
 } else {
 console.log('MongoDB successfully connected');
-console.log("Start sending Requests.... lets rock and roll");
+console.log("Start sending Requests...");
   }
 });
 
 uploadRouter.post('/',upload.single('uploadImage'),function(req,res,next){
-  console.log(req.file);
-  console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
+  console.log("The Image data coming from Post request" + req.file);
   var uploadData = new Upload({
     username:req.body.username,
     tagline:req.body.tagline,
