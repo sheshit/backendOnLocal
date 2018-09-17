@@ -20,17 +20,6 @@ console.log("Start sending Requests...");
   }
 });
 
-/*
- getUserInfo = async (accessToken) => {
-  var userInfoResponse = await fetch('https://www.googleapis.com/userinfo/v2/me', {
-    method:'GET',
-    headers: { Authorization: `Bearer ${accessToken}`},
-  });
-  console.log("coming from user userInfoResponse:::");
-  console.log(userInfoResponse.name+" and "+userInfoResponse.picture);
-}
-*/
-
 loginRouter.route('/').get((req,res)=>{
   res.send("Done and dusted.");
 }).post((req, res) => {
@@ -46,5 +35,7 @@ myData.save()
  res.status(400).send("unable to save to database");
  });
 });
+
+mongoose.disconnect();
 
 module.exports = loginRouter;

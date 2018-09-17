@@ -6,9 +6,9 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var LoginRouter = require('./routes/login');
 var uploadRouter = require('./routes/upload');
-var googleLoginRouter = require('./routes/login');
-
+var getPostsRouter = require('./routes/getPosts.js');
 
 
 var app = express();
@@ -24,8 +24,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/google-login',googleLoginRouter);
+app.use('/google-login',LoginRouter);
 app.use('/upload-image',uploadRouter);
+app.use('/get-posts',getPostsRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
