@@ -25,7 +25,7 @@ getPostsRouter.get('/',function(req,res,next){
   var resultArray = [];
   mongoose.connect(url,{useNewUrlParser:true},function(err,db){
     assert.equal(null,err);
-    const cursor = db.collection('uploads').find().sort({_id:-1}).limit(5);
+    const cursor = db.collection('uploads').find().sort({_id:-1}).limit(10);
     cursor.forEach(function(doc,err){
       assert.equal(err,null);
       resultArray.push(doc);

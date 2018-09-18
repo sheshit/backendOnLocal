@@ -34,20 +34,24 @@ AWS.config.update({
 const s3= new AWS.S3();
 
 uploadRouter.post('/',upload.single('uploadImage'),function(req,res,next){
-  uploadFile(req.file.path, req.file.filename ,res);
   console.log("The Image data coming from Post request" + JSON.stringify(req.file));
-  var item = new Upload({
+  var docId = mongoose.Types.ObjectId();
+  console.log("docId is "+docId);
+  var doc = new Upload({
     username:req.body.username,
     tagline:req.body.tagline,
-    uploadImage:req.file.path,
+    uploadImage:docId+'.jpg',
   });
-  console.log(item);
+  doc._id = docId;
+  docId = docId+".jpg";
+  uploadFile(req.file.path, docId ,res);
+  console.log(doc);
   mongoose.connect(url, { useNewUrlParser: true } , function(err,db){
     assert.equal(null,err);
-    db.collection('uploads').insertOne(item, function(err, result){
+    db.collection('uploads').insertOne(doc, function(err, result){
       assert.equal(null,err);
-      res.send("item saved to database");
-      console.log("item inserted as above format");
+      res.send("doc saved to database");
+      console.log("doc inserted as above format");
       db.close();
     });
 });
@@ -65,12 +69,10 @@ function uploadFile(source,targetName,res){
       s3.putObject(putParams, function(err, data){
         if (err) {
           console.log('Could nor upload the file. Error :',err);
-          return res.send({success:false});
         } 
         else{
           fs.unlink(source);// Deleting the file from uploads folder(Optional).Do Whatever you prefer.
           console.log(data);
-          return res.send({success:true});
         }
       });
     }
