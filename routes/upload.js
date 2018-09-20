@@ -44,7 +44,7 @@ uploadRouter.post('/', upload.single('uploadImage'), function (req, res, next) {
   });
   doc._id = docId;
   docId = docId + ".jpg";
-  uploadFile(req.file.path, docId, res);
+  uploadFileToS3(req.file.path, docId, res);
   console.log(doc);
   mongoose.connect(url, { useNewUrlParser: true }, function (err, db) {
     assert.equal(null, err);
@@ -57,7 +57,7 @@ uploadRouter.post('/', upload.single('uploadImage'), function (req, res, next) {
   });
 });
 
-function uploadFile(source, targetName, res) {
+function uploadFileToS3(source, targetName, res) {
   console.log('preparing to upload...');
   fs.readFile(source, function (err, filedata) {
     if (!err) {
