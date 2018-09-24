@@ -21,12 +21,12 @@ var upload = multer({ storage: storage });
 var url = "mongodb+srv://newadmin:helloworld@cluster0-53qcr.mongodb.net/FileUploads?retryWrites=true";
 console.log("getPosts.js");
 
-getPostsRouter.get('/', function (req, res, next) {
+getPostsRouter.get('/data/page=:pageOffset', function (req, res, next) {
   var resultArray = [];
   mongoose.connect(url, { useNewUrlParser: true }, function (err, db) {
     assert.equal(null, err);
-    const cursor = db.collection('uploads').find().sort({ _id: -1 }).limit(10);
-    cursor.forEach(function (doc, err) {
+    const cursor = db.collection('uploads').find().skip(req.params.pageOffset*5).sort({ _id: -1 }).limit(5);
+    cursor.forEach((doc, err) => {
       assert.equal(err, null);
       resultArray.push(doc);
     },

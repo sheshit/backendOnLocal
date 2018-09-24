@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 var imageUploadSchema = new Schema({
  username:String,
  tagline:String,
- uploadImage:String,
+ uploadImage:String
 },
 {
   timestamps:true,
