@@ -24,6 +24,7 @@ console.log("getPosts.js");
 
 getPostsRouter.get("/data/page=:pageOffset", function(req, res, next) {
   var resultArray = [];
+  console.log("received request");
   mongoose.connect(
     url,
     { useNewUrlParser: true },
@@ -42,6 +43,7 @@ getPostsRouter.get("/data/page=:pageOffset", function(req, res, next) {
         },
         function() {
           db.close();
+          console.log("sending response");
           console.log(resultArray);
           res.send(resultArray);
         }

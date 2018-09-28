@@ -27,7 +27,7 @@ var upload = multer({ storage: storage });
 AWS.config.update({
   accessKeyId: keys.iam_access_id,
   secretAccessKey: keys.iam_secret,
-  region: 'us-east-1',
+  region: 'ap-south-1',
 });
 
 //Creating a new instance of S3:
@@ -41,6 +41,7 @@ uploadRouter.post('/', upload.single('uploadImage'), function (req, res, next) {
     username: req.body.username,
     tagline: req.body.tagline,
     uploadImage: docId + '.jpg',
+    numberOfLikes: req.body.numberOfLikes,
   });
   doc._id = docId;
   docId = docId + ".jpg";
