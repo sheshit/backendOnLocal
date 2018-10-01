@@ -20,9 +20,7 @@ mongoose.connect(uri, { useNewUrlParser: true }, function (err, client) {
   }
 });
 
-loginRouter.route('/').get((req, res) => {
-  res.send("Done and dusted.");
-}).post((req, res) => {
+loginRouter.route('/').post((req, res) => {
   var myData = new User(req.body);
   console.log("inside the post request");
   // getUserInfo(req.body.accessToken);

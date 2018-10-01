@@ -9,6 +9,7 @@ var usersRouter = require("./routes/users");
 var LoginRouter = require("./routes/login");
 var uploadRouter = require("./routes/upload");
 var getPostsRouter = require("./routes/getPosts.js");
+var commentRouter = require('./routes/newComment');
 
 var app = express();
 // view engine setup
@@ -26,6 +27,7 @@ app.use("/users", usersRouter);
 app.use("/google-login", LoginRouter);
 app.use("/upload-image", uploadRouter);
 app.use("/get-posts", getPostsRouter);
+app.use('/newComment' , commentRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
