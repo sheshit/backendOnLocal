@@ -10,6 +10,7 @@ var LoginRouter = require("./routes/login");
 var uploadRouter = require("./routes/upload");
 var getPostsRouter = require("./routes/getPosts.js");
 var commentRouter = require('./routes/newComment');
+var getCommentsRouter = require('./routes/getComments.js');
 
 var app = express();
 // view engine setup
@@ -28,6 +29,7 @@ app.use("/google-login", LoginRouter);
 app.use("/upload-image", uploadRouter);
 app.use("/get-posts", getPostsRouter);
 app.use('/newComment' , commentRouter);
+app.use("/getComments", getCommentsRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
