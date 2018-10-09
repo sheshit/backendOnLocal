@@ -2,9 +2,6 @@ const express = require("express");
 const getCommentsRouter = express.Router();
 
 var mongoose = require("mongoose");
-var Upload = require("../models/imageUploadSchema");
-var fetch = require("node-fetch");
-var multer = require("multer");
 var assert = require("assert");
 
 var url =
@@ -18,6 +15,7 @@ getCommentsRouter.get("/data/page=:pageOffset", function(req, res, next) {
     url,
     { useNewUrlParser: true },
     function(err, db) {
+      console.log(db);
       assert.equal(null, err);
       const cursor = db
         .collection("5bb1e34ec06d7f2d809650a5.jpg")

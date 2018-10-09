@@ -1,39 +1,33 @@
-const express = require('express');
+const express = require("express");
 const loginRouter = express.Router();
 
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 loginRouter.use(bodyParser.json());
+var assert = require("assert");
 
 var mongoose = require("mongoose");
-var User = require('../models/userSchema');
-var fetch = require("node-fetch");
 
-var uri = "mongodb+srv://newadmin:helloworld@cluster0-53qcr.mongodb.net/projectNativeUsers?retryWrites=true";
+var url =
+  "mongodb+srv://newadmin:helloworld@cluster0-53qcr.mongodb.net/Users?retryWrites=true";
 console.log("login.js");
 
-mongoose.connect(uri, { useNewUrlParser: true }, function (err, client) {
-  if (err) {
-    throw new Error('Database failed to connect!');
-  } else {
-    console.log('MongoDB successfully connected');
-    console.log("Start sending Requests...");
-  }
-});
-
-loginRouter.route('/').post((req, res) => {
-  var myData = new User(req.body);
-  console.log("inside the post request");
-  // getUserInfo(req.body.accessToken);
-  console.log(myData + "  this.is what goes into mongodb");
-  myData.save()
-    .then(item => {
-      res.send("item saved to database");
-    })
-    .catch(err => {
-      res.status(400).send("unable to save to database");
+loginRouter.post("/", (req, res) => {
+  const doc = {
+    userId: req.body.userId,
+    name: req.body.name,
+    email: req.body.email,
+    photoUrl: req.body.photoUrl,
+    posts: []
+  };
+  mongoose.connect(url,{useNewUrlParser : true},function(err, db){
+    assert.equal(null,err);
+    db.collection("Users").insertOne(doc, (err,result) => {
+        assert.equal(null, err); 
+        console.log("user inserted");
+        res.send("user inserted successfully");
+        db.close();
     });
 });
-
-mongoose.disconnect();
+});
 
 module.exports = loginRouter;
