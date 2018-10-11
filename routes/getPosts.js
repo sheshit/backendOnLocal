@@ -2,8 +2,7 @@ const express = require("express");
 const getPostsRouter = express.Router();
 
 var mongoose = require("mongoose");
-var Upload = require("../models/imageUploadSchema");
-var fetch = require("node-fetch");
+var Upload = require("../models/fileUploadSchema");
 var multer = require("multer");
 var assert = require("assert");
 

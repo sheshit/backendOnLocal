@@ -7,10 +7,11 @@ var logger = require("morgan");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var LoginRouter = require("./routes/login");
-var uploadRouter = require("./routes/upload");
+var uploadImageRouter = require("./routes/imageUpload");
 var getPostsRouter = require("./routes/getPosts.js");
 var commentRouter = require('./routes/newComment');
 var getCommentsRouter = require('./routes/getComments.js');
+var uploadVideoRouter = require("./routes/videoUpload.js");
 
 var app = express();
 // view engine setup
@@ -26,7 +27,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/google-login", LoginRouter);
-app.use("/upload-image", uploadRouter);
+app.use("/upload-image", uploadImageRouter);
+app.use("/upload-video", uploadVideoRouter);
 app.use("/get-posts", getPostsRouter);
 app.use('/newComment' , commentRouter);
 app.use("/getComments", getCommentsRouter);

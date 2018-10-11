@@ -2,8 +2,7 @@ const express = require("express");
 const uploadRouter = express.Router();
 
 var mongoose = require("mongoose");
-var Upload = require("../models/imageUploadSchema");
-var fetch = require("node-fetch");
+var Upload = require("../models/fileUploadSchema");
 var multer = require("multer");
 var assert = require("assert");
 const AWS = require("aws-sdk");
@@ -15,7 +14,7 @@ var uploadURL =
 var commentDocumentURL =
   "mongodb+srv://newadmin:helloworld@cluster0-53qcr.mongodb.net/Comments?";
 
-console.log("upload.js");
+console.log("imageUpload.js");
 
 const storage = multer.diskStorage({
   destination: function(req, file, callback) {
@@ -42,12 +41,12 @@ uploadRouter.post("/", upload.single("uploadImage"), function(req, res, next) {
     "The Image data coming from Post request" + JSON.stringify(req.file)
   );
   var docId = mongoose.Types.ObjectId();
-  var discId = mongoose.Types.ObjectId();
+
   console.log("docId is " + docId);
   var doc = new Upload({
     username: req.body.username,
     tagline: req.body.tagline,
-    uploadImage: docId + ".jpg",
+    uploadFile: docId + ".jpg",
     numberOfLikes: req.body.numberOfLikes,
     discussionId: docId + ""
   });
