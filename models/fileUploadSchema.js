@@ -2,6 +2,8 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 var imageUploadSchema = new Schema(
   {
+    post_id:String,
+    user_id:String,
     username: String,
     tagline: String,
     uploadImage: String,

@@ -44,9 +44,11 @@ uploadRouter.post("/", upload.single("uploadImage"), function(req, res, next) {
 
   console.log("docId is " + docId);
   var doc = new Upload({
+    post_id: docId+"",
+    user_id: req.body.userId,
     username: req.body.username,
     tagline: req.body.tagline,
-    uploadFile: docId + ".jpg",
+    uploadImage: docId + ".jpg",
     numberOfLikes: req.body.numberOfLikes,
     discussionId: docId + ""
   });

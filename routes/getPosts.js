@@ -42,8 +42,6 @@ getPostsRouter.get("/data/page=:pageOffset", function(req, res, next) {
         },
         function() {
           db.close();
-          console.log("sending response");
-          console.log(resultArray);
           res.send(resultArray);
         }
       );
