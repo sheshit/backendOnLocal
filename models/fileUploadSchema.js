@@ -5,6 +5,7 @@ var imageUploadSchema = new Schema(
     post_id:String,
     user_id:String,
     username: String,
+    userPhoto:String,
     tagline: String,
     uploadImage: String,
     numberOfLikes: Number,

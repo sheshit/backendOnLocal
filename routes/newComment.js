@@ -10,14 +10,16 @@ commentRouter.post('/', (req,res,next) => {
      console.log("in comments");
      const doc = {
          name : req.body.name,
+         userId:req.body.userId,
+         userPhoto:req.body.userPhoto,
          text : req.body.text,
          children : [],
          likes : req.body.likes,
      }
      mongoose.connect(url,{useNewUrlParser : true},function(err, db){
          assert.equal(null,err);
-         console.log(req.body.photoUrl);
-         db.collection(req.body.photoUrl).insertOne(doc, (err,result) => {
+         console.log(req.body.post_id);
+         db.collection(req.body.post_id).insertOne(doc, (err,result) => {
              assert.equal(null, err);
              console.log("comment inserted");
              res.send("comment inserted successfully");

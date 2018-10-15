@@ -8,17 +8,16 @@ var url =
   "mongodb+srv://newadmin:helloworld@cluster0-53qcr.mongodb.net/Comments?";
 console.log("getComments.js");
 
-getCommentsRouter.get("/data/page=:pageOffset", function(req, res, next) {
+getCommentsRouter.get("/data/:post_id/page=:pageOffset", function(req, res, next) {
   var resultArray = [];
   console.log("received request");
   mongoose.connect(
     url,
     { useNewUrlParser: true },
     function(err, db) {
-      console.log(db);
       assert.equal(null, err);
       const cursor = db
-        .collection("5bb1e34ec06d7f2d809650a5.jpg")
+        .collection(req.params.post_id)
         .find()
         .skip(req.params.pageOffset * 5)
         .sort({ _id: -1 })

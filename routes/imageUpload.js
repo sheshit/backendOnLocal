@@ -47,6 +47,7 @@ uploadRouter.post("/", upload.single("uploadImage"), function(req, res, next) {
     post_id: docId+"",
     user_id: req.body.userId,
     username: req.body.username,
+    userPhoto:req.body.userPhoto,
     tagline: req.body.tagline,
     uploadImage: docId + ".jpg",
     numberOfLikes: req.body.numberOfLikes,
