@@ -50,6 +50,7 @@ uploadRouter.post("/", upload.single("uploadImage"), function(req, res, next) {
     userPhoto:req.body.userPhoto,
     tagline: req.body.tagline,
     uploadImage: docId + ".jpg",
+    fileType:req.body.fileType,
     numberOfLikes: req.body.numberOfLikes,
     discussionId: docId + ""
   });

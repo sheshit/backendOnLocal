@@ -36,7 +36,7 @@ AWS.config.update({
 //Creating a new instance of S3:
 const s3 = new AWS.S3();
 
-uploadRouter.post("/", upload.single("uploadVideo"), function(req, res, next) {
+uploadRouter.post("/", upload.single("uploadImage"), function(req, res, next) {
   console.log(
     "The Image data coming from Post request" + JSON.stringify(req.file)
   );
@@ -44,11 +44,15 @@ uploadRouter.post("/", upload.single("uploadVideo"), function(req, res, next) {
 
   console.log("docId is " + docId);
   var doc = new Upload({
+    post_id: docId+"",
+    user_id: req.body.userId,
     username: req.body.username,
+    userPhoto:req.body.userPhoto,
     tagline: req.body.tagline,
-    uploadFile: docId + ".mp4",
+    uploadImage: docId + ".mp4",
+    fileType:req.body.fileType,
     numberOfLikes: req.body.numberOfLikes,
-    discussionId: docId + ""
+    discussionId: docId + "",
   });
   doc._id = docId; //Specifies the ObjectId of the document.
   mongoose.connect(
