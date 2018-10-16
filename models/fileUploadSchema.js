@@ -7,7 +7,7 @@ var imageUploadSchema = new Schema(
     username: String,
     userPhoto:String,
     tagline: String,
-    uploadImage: String,
+    uploadFile: String,
     fileType:String,
     numberOfLikes: Number,
     discussionId: String
