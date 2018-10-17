@@ -22,17 +22,12 @@ loginRouter.post("/", (req, res) => {
   });
   mongoose.connect(url,{useNewUrlParser : true},function(err, db){
     assert.equal(null,err);
-    db.findOne({userId:req.body.userId}).then(function(user){
-      assert.equal(null,err);
-      if(!user){
-        db.collection("Users").insertOne(doc, (err,result) => {
-          assert.equal(null, err); 
-          console.log("user inserted");
-          res.send("user inserted successfully");
-          db.close();
-      });
-      }
-    }).catch(err);    
+    db.collection("Users").insertOne(doc, (err,result) => {
+        assert.equal(null, err); 
+        console.log("user inserted");
+        res.send("user inserted successfully");
+        db.close();
+    });
 });
 });
 
