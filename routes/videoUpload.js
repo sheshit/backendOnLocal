@@ -41,7 +41,7 @@ uploadRouter.post("/", upload.single("uploadFile"), function (req, res, next) {
     "The Image data coming from Post request" + JSON.stringify(req.file)
   );
   var docId = mongoose.Types.ObjectId();
-
+  var discussionId = docId;
   console.log("docId is " + docId);
   var doc = new Upload({
     post_id: docId + "",
@@ -52,7 +52,7 @@ uploadRouter.post("/", upload.single("uploadFile"), function (req, res, next) {
     uploadFile: docId + ".mp4",
     fileType: req.body.fileType,
     numberOfLikes: req.body.numberOfLikes,
-    discussionId: docId + "",
+    discussionId: discussionId + "",
   });
   doc._id = docId; //Specifies the ObjectId of the document.
   mongoose.connect(
@@ -61,15 +61,15 @@ uploadRouter.post("/", upload.single("uploadFile"), function (req, res, next) {
     function (err, db) {
       assert.equal(null, err);
       console.log("create collection mongoose");
-      db.createCollection(docId + "", function (err, res) {
+      db.createCollection(discussionId + "", function (err, res) {
         if (err) throw err;
         console.log("Collection created!");
         db.close();
       });
     }
   );
-  docId = docId + ".mp4";
-  uploadFileToS3(req.file.path, docId, res);
+  uploadFileId = docId + ".mp4";
+  uploadFileToS3(req.file.path, uploadFileId, res);
   console.log(doc);
   mongoose.connect(
     uploadURL,

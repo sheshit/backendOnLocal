@@ -20,7 +20,6 @@ LikesRouter.patch("/liked/:post_id", function(req, res, next) {
         function(err, result) {
           assert.equal(null, err);
           res.send("likes updated");
-          console.log("likes updated");
           db.close();
         });
     });
@@ -38,7 +37,6 @@ LikesRouter.patch("/disliked/:post_id", function(req, res, next) {
           function(err, result) {
             assert.equal(null, err);
             res.send("likes updated");
-            console.log("likes updated");
             db.close();
           });
       });
