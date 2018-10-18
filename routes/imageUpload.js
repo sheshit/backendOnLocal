@@ -52,6 +52,7 @@ uploadRouter.post("/", upload.single("uploadFile"), function(req, res, next) {
     uploadFile: docId + ".jpg",
     fileType:req.body.fileType,
     numberOfLikes: req.body.numberOfLikes,
+    likedBy:[],
     discussionId: docId + ""
   });
   doc._id = docId; //Specifies the ObjectId of the document.

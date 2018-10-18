@@ -10,6 +10,7 @@ var imageUploadSchema = new Schema(
     uploadFile: String,
     fileType:String,
     numberOfLikes: Number,
+    likedBy:[String],
     discussionId: String
   },
   {

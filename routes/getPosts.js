@@ -21,7 +21,7 @@ var url =
   "mongodb+srv://newadmin:helloworld@cluster0-53qcr.mongodb.net/FileUploads?retryWrites=true";
 console.log("getPosts.js");
 
-getPostsRouter.get("/data/page=:pageOffset", function(req, res, next) {
+getPostsRouter.get("/:userId/data/page=:pageOffset", function(req, res, next) {
   var resultArray = [];
   console.log("received request");
   mongoose.connect(
@@ -38,6 +38,12 @@ getPostsRouter.get("/data/page=:pageOffset", function(req, res, next) {
       cursor.forEach(
         (doc, err) => {
           assert.equal(err, null);
+          var isLiked = doc.likedBy.lastIndexOf(req.params.userId);
+          if (isLiked >= 0) {
+            doc.liked = true;
+          } else {
+            doc.liked = false;
+          }
           resultArray.push(doc);
         },
         function() {
