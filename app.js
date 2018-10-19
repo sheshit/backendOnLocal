@@ -4,7 +4,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
-
+var faviconRouter = require("./routes/favicon");
 var LoginRouter = require("./routes/login");
 var uploadImageRouter = require("./routes/imageUpload");
 var getPostsRouter = require("./routes/getPosts.js");
@@ -24,6 +24,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use("/favicon.ico",faviconRouter);
 app.use("/google-login", LoginRouter);
 app.use("/upload-image", uploadImageRouter);
 app.use("/upload-video", uploadVideoRouter);
