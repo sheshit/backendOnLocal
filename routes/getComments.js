@@ -29,9 +29,9 @@ getCommentsRouter.get("/data/:post_id/page=:pageOffset", function(req, res, next
         },
         function() {
           db.close();
-          console.log("sending response");
-          console.log(resultArray);
+         // console.log(resultArray);
           res.send(resultArray);
+          console.log("sending response");
         }
       );
     }
