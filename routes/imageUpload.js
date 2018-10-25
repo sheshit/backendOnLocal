@@ -40,7 +40,7 @@ const sharp = require("sharp");
 
 function resize(source, format, targetName,width, height) {
 
-  sharp(source).resize(width, null).toBuffer(function (err, data){
+  sharp(source).resize(width, null).withMetadata().toBuffer(function (err, data){
     if (err) throw err;
     const putParams = {
       Bucket: "projectnativeimages-bucket",
@@ -51,7 +51,10 @@ function resize(source, format, targetName,width, height) {
       if (err) {
         console.log("Could nor upload the file. Error :", err);
       } else {
-         fs.unlink(source); // Deleting the file from uploads folder(Optional).
+         fs.unlink(source,(err) => {
+           if(err) throw err;
+           console.log("file deleted from uploads folder");
+         }); // Deleting the file from uploads folder(Optional).
         console.log("data from s3 " + JSON.stringify(data));
       }
     });
